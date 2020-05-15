@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Subsets {
     public static void main(String[] args) {
-        int[] nums = {1,2,3,4,5,6};
+        int[] nums = {1,2,3};
         List<List<Integer>> subsets = getSubsets(nums);
         for(List<Integer> subset : subsets){
             System.out.println(subset);
