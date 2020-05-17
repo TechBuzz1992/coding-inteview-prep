@@ -2,7 +2,7 @@ package amazon.tree;
 
 import java.util.*;
 
-public class PreOrderTraversal {
+public class TreeTraversals {
     static class TreeNode {
         int val;
         TreeNode left;
@@ -76,23 +76,24 @@ public class PreOrderTraversal {
             return;
         }
 
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode curr = root;
-        while (curr != null || stack.size() > 0) {
-
-            while(curr!=null){
-                stack.add(curr);
-                curr = curr.left;
+        Stack<TreeNode> s1 = new Stack<>();
+        Stack<TreeNode> s2 = new Stack<>();
+        s1.add(root);
+        while(!s1.isEmpty()){
+            TreeNode curr = s1.pop();
+            s2.push(curr);
+            if(curr.left!=null){
+                s1.push(curr.left);
             }
-
-            curr = stack.pop();
-            System.out.print(curr.val + " ");
-            
-
+            if(curr.right!=null){
+                s1.push(curr.right);
+            }
 
         }
 
-        return;
+        while(!s2.isEmpty()){
+            System.out.print(s2.pop().val+" ");
+        }
 
     }
 
