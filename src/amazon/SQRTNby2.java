@@ -5,7 +5,7 @@ package amazon;
  * Idea behind the sqrt is to do the binary search of sqrt of 2 between 0 and x.
  */
 
-import java.util.*;
+//import java.util.*;
 
 public class SQRTNby2 {
     public static void main(String[] args) {
