@@ -13,7 +13,7 @@ public class MinPathSum {
         }
 
         for (int i = 1; i < grid[0].length; i++) {
-            grid[0][i - 1] += grid[0][i - 1];
+            grid[0][i] += grid[0][i - 1];
         }
 
         for (int i = 1; i < grid.length; i++) {
