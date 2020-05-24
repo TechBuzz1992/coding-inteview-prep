@@ -20,7 +20,7 @@ public class NoOfIslands {
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums[i].length; j++) {
                 if (nums[i][j] == 1) {
-                    count += dfs(nums, i, j);
+                    count += bfs(nums, i, j);
                     // count++;
                 }
 
@@ -31,15 +31,15 @@ public class NoOfIslands {
 
     }
 
-    public int dfs(int[][] nums, int i, int j) {
+    public int bfs(int[][] nums, int i, int j) {
         if (i < 0 || i >= nums.length || j < 0 || j >= nums[i].length || nums[i][j] == 0) {
             return 0;
         }
         nums[i][j] = 0;
-        dfs(nums, i + 1, j);
-        dfs(nums, i - 1, j);
-        dfs(nums, i, j + 1);
-        dfs(nums, i, j - 1);
+        bfs(nums, i + 1, j);
+        bfs(nums, i - 1, j);
+        bfs(nums, i, j + 1);
+        bfs(nums, i, j - 1);
 
         return 1;
 
