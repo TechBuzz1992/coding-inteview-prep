@@ -1,4 +1,4 @@
-package coding_patterns.heaps;
+package coding_patterns;
 
 import java.util.*;
 
