@@ -60,6 +60,73 @@ public class LeftRightViewTree {
         return rightViewList;
     }
 
+    public int getDiameter(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int diameter = 0;
+        List<List<Integer>> levelOrder = getLevelOrderTraversal(root);
+        for (int i = 0; i < levelOrder.size(); i++) {
+            diameter = Math.max(diameter, levelOrder.get(i).size());
+        }
+
+        return diameter;
+
+    }
+
+    public int getHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        List<List<Integer>> list = getLevelOrderTraversal(root);
+
+        return list.size();
+    }
+
+    public boolean isSumTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while (queue.size() > 0) {
+            TreeNode current = queue.poll();
+            int left = current.left != null ? current.left.val : 0;
+            int right = current.right != null ? current.right.val : 0;
+            if (left == 0 && right == 0) {
+                continue;
+            }
+            if (current.val != left + right) {
+                return false;
+            }
+
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+
+            if (current.right != null) {
+                queue.add(current.right);
+            }
+
+        }
+
+        return true;
+
+    }
+
+    public boolean isBalanced(TreeNode root) {
+
+    }
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(0);
         root.left = new TreeNode(1);
@@ -67,7 +134,8 @@ public class LeftRightViewTree {
         root.left.left = new TreeNode(3);
         root.left.right = new TreeNode(4);
         root.right.left = new TreeNode(5);
-        //root.right.right = new TreeNode(6);
+        root.right.left.right = new TreeNode(6);
+        // root.right.right = new TreeNode(6);
 
         LeftRightViewTree obj = new LeftRightViewTree();
         List<List<Integer>> list = obj.getLevelOrderTraversal(root);
@@ -80,6 +148,15 @@ public class LeftRightViewTree {
         List<Integer> rightView = obj.getTreeRightView(root);
         System.out.println("Tree Left View : " + leftView);
         System.out.println("Tree Right View : " + rightView);
+        System.out.println("Tree Diameter is : " + obj.getDiameter(root));
+        System.out.println("Tree height is : " + obj.getHeight(root));
+
+        TreeNode root1 = new TreeNode(12);
+        root1.left = new TreeNode(5);
+        root1.right = new TreeNode(7);
+        root1.left.left = new TreeNode(5);
+        System.out.println("Tree isSum Tree ? : " + obj.isSumTree(root1));
+
     }
 
 }
