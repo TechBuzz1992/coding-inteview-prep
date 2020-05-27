@@ -14,6 +14,10 @@ public class LeftRightViewTree {
         }
     }
 
+    static class Height {
+        int height = 0;
+    }
+
     public List<List<Integer>> getLevelOrderTraversal(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<List<Integer>>();
         if (root == null) {
@@ -123,7 +127,29 @@ public class LeftRightViewTree {
 
     }
 
-    public boolean isBalanced(TreeNode root) {
+    public boolean isBalanced(TreeNode root, Height height) {
+        if (root == null) {
+            height.height = 0;
+            return true;
+        }
+        Height lHeight = new Height();
+        Height rHeight = new Height();
+
+        boolean l = isBalanced(root.left, lHeight);
+        boolean r = isBalanced(root.right, rHeight);
+
+        int lH = lHeight.height;
+        int rH = rHeight.height;
+
+        height.height = Math.max(lH, rH) + 1;
+
+        if (Math.abs(lH - rH) >= 2) {
+            return false;
+        }
+
+        else {
+            return l && r;
+        }
 
     }
 
@@ -135,6 +161,8 @@ public class LeftRightViewTree {
         root.left.right = new TreeNode(4);
         root.right.left = new TreeNode(5);
         root.right.left.right = new TreeNode(6);
+        root.right.left.right.left = new TreeNode(7);
+        //root.right.left.right.left.right = new TreeNode(7);
         // root.right.right = new TreeNode(6);
 
         LeftRightViewTree obj = new LeftRightViewTree();
@@ -156,6 +184,7 @@ public class LeftRightViewTree {
         root1.right = new TreeNode(7);
         root1.left.left = new TreeNode(5);
         System.out.println("Tree isSum Tree ? : " + obj.isSumTree(root1));
+        System.out.println("Is Tree balanced ? : " + obj.isBalanced(root, new Height()));
 
     }
 
