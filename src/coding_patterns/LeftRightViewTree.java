@@ -67,7 +67,7 @@ public class LeftRightViewTree {
         root.left.left = new TreeNode(3);
         root.left.right = new TreeNode(4);
         root.right.left = new TreeNode(5);
-        root.right.right = new TreeNode(6);
+        //root.right.right = new TreeNode(6);
 
         LeftRightViewTree obj = new LeftRightViewTree();
         List<List<Integer>> list = obj.getLevelOrderTraversal(root);
@@ -75,6 +75,11 @@ public class LeftRightViewTree {
         for (List<Integer> ls : list) {
             System.out.println(ls);
         }
+
+        List<Integer> leftView = obj.getTreeLeftView(root);
+        List<Integer> rightView = obj.getTreeRightView(root);
+        System.out.println("Tree Left View : " + leftView);
+        System.out.println("Tree Right View : " + rightView);
     }
 
 }
