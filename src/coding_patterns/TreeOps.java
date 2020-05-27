@@ -2,7 +2,7 @@ package coding_patterns;
 
 import java.util.*;
 
-public class LeftRightViewTree {
+public class TreeOps {
     static class TreeNode {
         int val;
         TreeNode left;
@@ -153,6 +153,24 @@ public class LeftRightViewTree {
 
     }
 
+    public boolean isBST(TreeNode root) {
+        return isBStUtil(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+
+    }
+
+    public boolean isBStUtil(TreeNode root, int min, int max) {
+        if (root == null) {
+            return true;
+        }
+
+        if (root.val < min || root.val > max) {
+            return false;
+        }
+
+        return isBStUtil(root.left, min, root.val - 1) && isBStUtil(root.right, root.val + 1, max);
+
+    }
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(0);
         root.left = new TreeNode(1);
@@ -162,10 +180,10 @@ public class LeftRightViewTree {
         root.right.left = new TreeNode(5);
         root.right.left.right = new TreeNode(6);
         root.right.left.right.left = new TreeNode(7);
-        //root.right.left.right.left.right = new TreeNode(7);
+        // root.right.left.right.left.right = new TreeNode(7);
         // root.right.right = new TreeNode(6);
 
-        LeftRightViewTree obj = new LeftRightViewTree();
+        TreeOps obj = new TreeOps();
         List<List<Integer>> list = obj.getLevelOrderTraversal(root);
 
         for (List<Integer> ls : list) {
